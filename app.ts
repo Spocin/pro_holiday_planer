@@ -1,13 +1,13 @@
 /*Imports*/
-import express, {Request,Response} from "express";
-import httpError, {HttpError} from "http-errors";
+import express, { Request,Response } from "express";
+import httpError, { HttpError } from "http-errors";
 import {NextFunction} from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 
-const indexRouter = require('./routes');
-const usersRouter = require('./routes/users');
+import { indexRouter } from "./routes/index";
+import { usersRouter } from './routes/users';
 
 const app = express();
 
@@ -30,7 +30,7 @@ app.use((req: Request, res:Response, next:NextFunction) => {
 });
 
 // error handler
-app.use((err:HttpError, req:Request, res:Response, next:NextFunction) => {
+app.use((err:HttpError, req:Request, res:Response) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
