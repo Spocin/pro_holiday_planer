@@ -69,3 +69,6 @@ typings/
 # transpiled files
 /dist/*
 !/dist/.gitkeep
+
+# all JavaScript files
+*.js
