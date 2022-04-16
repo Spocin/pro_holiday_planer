@@ -62,3 +62,7 @@ typings/
 
 # .idea files
 /.idea
+
+# transpiled files
+/dist/*
+!/dist/.gitkeep
