@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "npx tsc",
-    "start": "node dist/bin/HolidayPlaner.ts",
+    "start": "node bin/HolidayPlaner.js",
     "dev": "nodemon bin/HolidayPlaner.ts"
   },
   "dependencies": {
