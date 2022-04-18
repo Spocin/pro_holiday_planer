@@ -1,13 +1,12 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelizeDbConnection } from "../config/sequelize/sequelizeDbConnection";
 
-import {generateRequiredMsg, generateLengthMsg, generateCapitalLetterMsg} from "../utils/ModelUtils";
-import Country from "./Country";
+import { generateRequiredMsg, generateLengthMsg, generateCapitalLetterMsg } from "../utils/ModelUtils";
 
 interface CityAttributes {
     id: number;
     name: string;
-    fk_country: string
+    fk_country: number;
     createdAt?: Date;
     updatedAt?: Date;
     deletedAt?: Date;
@@ -19,7 +18,7 @@ interface UserOutput extends Required<CityAttributes>{}
 class City extends Model<CityAttributes, CityInput> implements CityAttributes {
     public id!: number;
     public name!: string;
-    public fk_country!: string;
+    public fk_country!: number;
 
     //timestamps
     public readonly createdAt!: Date;
@@ -51,7 +50,7 @@ City.init({
         }
     },
     fk_country: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false
     }
 }, {
@@ -59,13 +58,5 @@ City.init({
     sequelize: sequelizeDbConnection,
     paranoid: true
 })
-
-City.belongsTo(Country, {
-    as: 'country',
-    foreignKey: {
-        name: 'id',
-        allowNull: false
-    }
-});
 
 export default City

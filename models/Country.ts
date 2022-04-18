@@ -55,14 +55,4 @@ Country.init({
     paranoid: true
 });
 
-Country.hasMany(City, {
-    as: 'countries',
-    foreignKey: {
-        name: 'fk_country',
-        allowNull: false
-    },
-    constraints: true,
-    onDelete: 'CASCADE'
-})
-
 export default Country
