@@ -37,6 +37,7 @@ User.init({
     login: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         validate: {
             notEmpty: {
                 msg: generateRequiredMsg()
@@ -54,6 +55,7 @@ User.init({
     email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         validate: {
             notEmpty: {
                 msg: generateRequiredMsg(),
