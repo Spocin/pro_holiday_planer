@@ -1,16 +1,32 @@
-import {sequelizeDbConnection} from "./sequelizeDbConnection";
-
-import User from "../../models/User";
-
+import City from "../../models/City";
+import Country from "../../models/Country";
 
 const dbInit = async () => {
 
-    await User.sync({
+    /*CONSTRAINTS*/
+    City.belongsTo(Country, {
+        as: 'country',
+        foreignKey: 'id'
+    });
+
+    Country.hasMany(City, {
+        as: 'countries',
+        foreignKey: "fk_country",
+        constraints: true,
+        onDelete: 'CASCADE'
+    });
+
+    await Country.sync({
         force: true
     });
-    console.log("Synced User");
+    console.log("Synced Country");
+
+    await City.sync({
+        force: true
+    });
+    console.log("Synced City");
+
+    //TODO create rest of the models
 }
 
 export {dbInit}
-
-//TODO create rest of the models
