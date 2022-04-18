@@ -1,7 +1,7 @@
 import { DataTypes, Model, Optional} from "sequelize";
 import { sequelizeDbConnection } from "../config/sequelize/sequelizeDbConnection";
 
-import {generateLengthMsg, generateRequiredMsg} from "../utils/ModelUtils";
+import {generateLengthMsg, generateRequiredMsg, generateCapitalLetterMsg} from "../utils/ModelUtils";
 
 interface UserAttributes {
     id: number;
@@ -13,8 +13,8 @@ interface UserAttributes {
     deletedAt?: Date;
 }
 
-interface UserInput extends Optional<UserAttributes, 'id'> {}
-interface UserOutput extends Required<UserAttributes> {}
+interface UserInput extends Optional<UserAttributes, 'id'>{}
+interface UserOutput extends Required<UserAttributes>{}
 
 class User extends Model<UserAttributes, UserInput> implements UserAttributes {
     public id!: number;
@@ -22,7 +22,7 @@ class User extends Model<UserAttributes, UserInput> implements UserAttributes {
     public email!: string;
     public password!: string;
 
-    //timestamps
+    /*TIMESTAMPS*/
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
     public readonly deletedAt!: Date;
@@ -39,7 +39,7 @@ User.init({
         allowNull: false,
         validate: {
             notEmpty: {
-                msg: generateRequiredMsg(),
+                msg: generateRequiredMsg()
             },
             len: {
                 args: [5,200],
@@ -47,7 +47,7 @@ User.init({
             },
             is: {
                 args: /([A-Z])\w+/,
-                msg: "Has to start with capital letter"
+                msg: generateCapitalLetterMsg()
             }
         }
     },
