@@ -1,14 +1,10 @@
 import City from "../../models/City";
 import Country from "../../models/Country";
+import {sequelizeDbConnection} from "./sequelizeDbConnection";
 
 const dbInit = async () => {
 
     /*CONSTRAINTS*/
-    City.belongsTo(Country, {
-        as: 'country',
-        foreignKey: 'id'
-    });
-
     Country.hasMany(City, {
         as: 'countries',
         foreignKey: "fk_country",
@@ -16,15 +12,14 @@ const dbInit = async () => {
         onDelete: 'CASCADE'
     });
 
-    await Country.sync({
-        force: true
+    City.belongsTo(Country, {
+        as: 'country',
+        foreignKey: 'id'
     });
-    console.log("Synced Country");
 
-    await City.sync({
+    await sequelizeDbConnection.sync({
         force: true
-    });
-    console.log("Synced City");
+    })
 
     //TODO create rest of the models
 }
