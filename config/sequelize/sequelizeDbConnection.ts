@@ -1,6 +1,6 @@
 import {Sequelize} from "sequelize";
 
-const sequelizeDbConnection = new Sequelize('holiday-planer','app','app', {
+const sequelizeDbConnection = new Sequelize('holiday_planner','root','root', {
     dialect: 'mysql',
     host: 'localhost'
 });
