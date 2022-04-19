@@ -56,9 +56,19 @@ typings/
 
 # dotenv environment variables file
 .env
+/dotenv/envs/*
+!/dotenv/envs/.gitkeep
+!/dotenv/templates/*
 
 # next.js build output
 .next
 
 # .idea files
 /.idea
+
+# transpiled files
+/dist/*
+!/dist/.gitkeep
+
+# all JavaScript files
+*.js

@@ -8,6 +8,12 @@ import morgan from "morgan";
 
 import { indexRouter } from "./routes/index";
 import { usersRouter } from './routes/users';
+import {dbInit} from "./config/sequelize/initialize";
+
+dbInit()
+    .catch(err => {
+      console.log(err);
+    })
 
 const app = express();
 
