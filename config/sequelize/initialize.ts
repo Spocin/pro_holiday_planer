@@ -2,6 +2,7 @@ import City from "../../models/City";
 import Country from "../../models/Country";
 import User from "../../models/User";
 import Suitcase from "../../models/Suitcase";
+import Item from "../../models/Item";
 
 import { sequelizeDbConnection } from "./sequelizeDbConnection";
 
@@ -44,7 +45,14 @@ const dbInit = async () => {
         foreignKey: "fk_city"
     });
 
-    //TODO create rest of constraints and models
+    Suitcase.belongsToMany(Item, {
+        through: "Suitcase_Item",
+    });
+
+    Item.belongsToMany(Suitcase, {
+        through: "Suitcase_Item",
+
+    });
 
     await sequelizeDbConnection.sync({
         force: true
